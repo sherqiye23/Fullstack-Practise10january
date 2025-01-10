@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import axios from 'axios';
 import Container from 'react-bootstrap/esm/Container';
-import { useGetImmigrationQuery } from '../../redux/slices/ImmigrationSlice';
-
+import { useGetImmigrationQuery, usePostImmigrationMutation } from '../../redux/slices/ImmigrationSlice';
+import { useNavigate } from "react-router";
+import { Helmet } from 'react-helmet';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Required'),
@@ -17,14 +17,16 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function AddPage() {
-    let {data, refetch, isLoading} = useGetImmigrationQuery()
-    console.log(data);
-    
+    let { refetch } = useGetImmigrationQuery()
+    const navigate = useNavigate();
     let [postImmigration] = usePostImmigrationMutation()
 
 
     return(
         <>
+            <Helmet>
+                <title>Add Page</title>
+            </Helmet>
              <Container className='h-[60vh] my-5'>
                 <h1 className='text-center my-3 '>Add Form</h1>
                 <Formik

@@ -1,5 +1,12 @@
+import { Helmet } from "react-helmet";
+
 export default function Favorites() {
-    return(
-        <>fav page</>
+    return (
+        <>
+            <Helmet>
+                <title>Favorites</title>
+            </Helmet>
+            fav page
+        </>
     )
 }
