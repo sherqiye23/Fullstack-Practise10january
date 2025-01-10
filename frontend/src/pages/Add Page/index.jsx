@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import Container from 'react-bootstrap/esm/Container';
+import { useGetImmigrationQuery } from '../../redux/slices/ImmigrationSlice';
 
 
 const validationSchema = Yup.object().shape({
@@ -16,6 +17,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function AddPage() {
+    let {data, refetch, isLoading} = useGetImmigrationQuery()
+    console.log(data);
+    
+    let [postImmigration] = usePostImmigrationMutation()
+
+
     return(
         <>
              <Container className='h-[60vh] my-5'>
@@ -30,7 +37,12 @@ export default function AddPage() {
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
                         console.log(values);
-                        
+                        async function post() {
+                            await postImmigration(values)
+                            refetch()
+                            navigate("/")
+                        }
+                        post()
                         // axios.post("", values).then(() => {
                         //     // burda sehifeye qayidandan sonra elave edilen mehsul ekranda gorunmurdu, window location ile yazdim ki sehifeye refresh atsin ele olanda gorunur
                         //     // swal(`${values.name} əlavə olundu!`, "", "success")
