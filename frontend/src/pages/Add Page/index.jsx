@@ -44,13 +44,7 @@ export default function AddPage() {
                             refetch()
                             navigate("/")
                         }
-                        post()
-                        // axios.post("", values).then(() => {
-                        //     // burda sehifeye qayidandan sonra elave edilen mehsul ekranda gorunmurdu, window location ile yazdim ki sehifeye refresh atsin ele olanda gorunur
-                        //     // swal(`${values.name} əlavə olundu!`, "", "success")
-                        //     // navigate("/admin/products")
-                        //     window.location = "/admin/products"
-                        // })                        
+                        post()                      
                     }}
                 >
                     {({ isSubmitting }) => (
